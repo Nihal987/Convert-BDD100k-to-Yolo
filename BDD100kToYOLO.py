@@ -21,6 +21,8 @@ def convert_labels(input_labels, input_images,output_path,class_list):
                     with open(output_path+"/labels/"+filename,"w") as text_file:
                         for label in entry['labels']:
                             class_name = label["category"]
+                            if class_name not in class_list:
+                                continue
                             class_id = class_list.index(str(class_name))
                             normalized_point_list = []
                             normalized_point_list.append(class_id)
@@ -34,6 +36,7 @@ def convert_labels(input_labels, input_images,output_path,class_list):
                             for i in range (len(normalized_point_list)):
                                 text_file.write(str(normalized_point_list[i])+" ")
                             text_file.write("\n")
+
 
 
 
@@ -58,3 +61,4 @@ if __name__ == "__main__":
     print("--------------DONE-------------")
 
 # python3 BDD100kToYOLO.py --input_labels bdd100k_dataset/annotations/drivable_val.json --input_images bdd100k_dataset/images/val --output_path val
+# python3 BDD100kToYOLO.py --input_labels bdd100k_dataset/annotations/drivable_train.json --input_images bdd100k_dataset/images/train --output_path train
