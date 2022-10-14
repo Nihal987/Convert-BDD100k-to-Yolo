@@ -31,14 +31,10 @@ def convert_labels(input_labels, input_images,output_path,class_list):
                                 (px,py) = vertex
                                 if(px>1280 and px<1281):
                                     px = 1
-                                elif(px>1281):
-                                    print("TOO BIG px")
                                 else:
                                     px = px/1280
                                 if(py>720 and py<721):
                                     py = 1
-                                elif py>721:
-                                    print("TOO BIG py")
                                 else:
                                     py = py/720
                                 normalized_point_list.append(px)
