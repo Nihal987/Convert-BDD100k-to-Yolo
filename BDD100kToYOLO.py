@@ -29,8 +29,18 @@ def convert_labels(input_labels, input_images,output_path,class_list):
                             vertices = label["poly2d"][0]["vertices"]
                             for vertex in vertices:
                                 (px,py) = vertex
-                                px = px/1280
-                                py = py/720
+                                if(px>1280 and px<1281):
+                                    px = 1
+                                elif(px>1281):
+                                    print("TOO BIG px")
+                                else:
+                                    px = px/1280
+                                if(py>720 and py<721):
+                                    py = 1
+                                elif py>721:
+                                    print("TOO BIG py")
+                                else:
+                                    py = py/720
                                 normalized_point_list.append(px)
                                 normalized_point_list.append(py)
                             for i in range (len(normalized_point_list)):
@@ -51,8 +61,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args(sys.argv[1:])
 
-    # input_labels = "bdd100k_dataset/annotations/drivable_val.json"
-    # input_images = "bdd100k_dataset/images/val"
+    # input_labels = "old_format/annotations/drivable_val.json"
+    # input_images = "old_format/images/val"
     # output_path = "val"
 
     class_list = ["direct","alternative"]
@@ -60,5 +70,5 @@ if __name__ == "__main__":
     convert_labels(args.input_labels,args.input_images,args.output_path,class_list)
     print("--------------DONE-------------")
 
-# python3 BDD100kToYOLO.py --input_labels bdd100k_dataset/annotations/drivable_val.json --input_images bdd100k_dataset/images/val --output_path val
-# python3 BDD100kToYOLO.py --input_labels bdd100k_dataset/annotations/drivable_train.json --input_images bdd100k_dataset/images/train --output_path train
+# python3 BDD100kToYOLO.py --input_labels old_format/annotations/drivable_val.json --input_images old_format/images/val --output_path val
+# python3 BDD100kToYOLO.py --input_labels old_format/annotations/drivable_train.json --input_images old_format/images/train --output_path train
